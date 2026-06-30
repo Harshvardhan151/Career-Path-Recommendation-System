@@ -2,7 +2,7 @@
 
 A machine learning-powered web application that accurately predicts suitable career paths for students based on their skills, academic performance, and personal preferences. Built on an optimized Decision Tree classifier, the system provides personalized, data-driven career guidance backed by explainable predictions.
 
-✨ **Live Application:** [Explore the Career Paths Recommender App](https://career-path-finder.streamlit.app)
+✨ **Live Application:** [Explore the Career Path Finder App](https://career-path-finder.streamlit.app)
 
 ---
 
@@ -71,4 +71,4 @@ To ensure fast loading and reliable performance in production, all pipeline arti
 
 The system is fully deployed, optimized, and ready for public use. 
 
-👉 **Access the application here:** **[Career Paths Recommender App](https://career-path-finder.streamlit.app)**
+👉 **Access the application here:** **[Career Path Finder App](https://career-path-finder.streamlit.app)**
