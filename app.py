@@ -592,29 +592,38 @@ if pipeline is not None:
                 {'Career': complementary_careers[1][0], 'Confidence': complementary_careers[1][1], 'Type': 'Complementary'}
             ]
             
+            # Fetch descriptions for the layout
+            primary_info = get_career_info(primary_pred)
+            alt1_name = complementary_careers[0][0]
+            alt1_info = get_career_info(alt1_name)
+            alt2_name = complementary_careers[1][0]
+            alt2_info = get_career_info(alt2_name)
+            
             st.markdown(f"""
-            <div class="result-hero">
-                <div class="accent-bar"></div>
-                <div class="result-role">🎉 Top Career Matches</div>
-                <p style="color: #94a3b8; margin-top: 8px;">Your profile vector matches the logical execution constraints required for these structural corporate career tracks.</p>
+            <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 32px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); margin-top: 20px; transition: all 0.3s ease;" onmouseover="this.style.boxShadow='0 8px 40px rgba(245, 158, 11, 0.15)'; this.style.borderColor='rgba(245, 158, 11, 0.3)';" onmouseout="this.style.boxShadow='0 4px 30px rgba(0, 0, 0, 0.2)'; this.style.borderColor='rgba(255,255,255,0.05)';">
+                <div style="width: 40px; height: 4px; background: #f59e0b; border-radius: 2px; margin-bottom: 16px;"></div>
+                <h2 style="color: #f1f5f9; font-size: 2.2rem; font-weight: 800; margin-bottom: 12px; font-family: 'Inter';">{primary_pred}</h2>
+                <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7; margin: 0;">{primary_info['description']}</p>
             </div>
             """, unsafe_allow_html=True)
 
-            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown('<div class="section-label" style="margin-top: 2.5rem; margin-bottom: 1.5rem;">Alternative Career Recommendations</div>', unsafe_allow_html=True)
 
-            # Display top 3 career options
-            col1, col2, col3 = st.columns(3, gap="large")
-            
-            for idx, (col, result) in enumerate(zip([col1, col2, col3], display_results)):
-                with col:
-                    st.markdown(f"""
-                    <div class="career-card">
-                        <div class="career-rank">#{idx + 1}</div>
-                        <h3 style="color: #f1f5f9; margin: 12px 0;">{result['Career']}</h3>
-                        <div class="career-confidence">{result['Confidence']:.1f}% Match</div>
-                        <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 8px;">{result['Type']}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
+            col1, col2 = st.columns(2, gap="large")
+            with col1:
+                st.markdown(f"""
+                <div style="background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 24px; min-height: 160px; height: 100%; transition: all 0.3s ease;" onmouseover="this.style.boxShadow='0 8px 30px rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(255, 255, 255, 0.15)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.05)'; this.style.transform='translateY(0)';">
+                    <h3 style="color: #f1f5f9; font-size: 1.35rem; font-weight: 700; margin-bottom: 12px; font-family: 'Inter';">{alt1_name}</h3>
+                    <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin: 0;">{alt1_info['description']}</p>
+                </div>
+                """, unsafe_allow_html=True)
+            with col2:
+                st.markdown(f"""
+                <div style="background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 24px; min-height: 160px; height: 100%; transition: all 0.3s ease;" onmouseover="this.style.boxShadow='0 8px 30px rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(255, 255, 255, 0.15)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.05)'; this.style.transform='translateY(0)';">
+                    <h3 style="color: #f1f5f9; font-size: 1.35rem; font-weight: 700; margin-bottom: 12px; font-family: 'Inter';">{alt2_name}</h3>
+                    <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin: 0;">{alt2_info['description']}</p>
+                </div>
+                """, unsafe_allow_html=True)
 
             st.markdown("<br><br>", unsafe_allow_html=True)
 
